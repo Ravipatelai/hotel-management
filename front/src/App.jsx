@@ -8,6 +8,11 @@ import Register from "./pages/Register";
 import Contact from "./pages/Contact";
 import Service from "./pages/Service";
 import RoomBooking from "./pages/RoomBooking";
+import Rooms from "./pages/Rooms";
+import AddRoom from "./pages/AddRoom";
+import DeleteRoom from "./pages/DeleteRoom";
+import GetUsers from "./pages/GetUsers";
+
 
 function App() {
   return (
@@ -22,6 +27,10 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="contact" element={<Contact />} />
           <Route path="admin" element={<Admin />} />
+          <Route path="rooms" element={<Rooms />} />
+          <Route path="addroom" element={<AddRoom />} />
+          <Route path="/deleteroom" element={<DeleteRoom />} />
+           <Route path="/getusers" element={<GetUsers />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,0 +1,55 @@
+.rooms-container {
+  padding: 60px 20px;
+  text-align: center;
+  background: #f4f4f4;
+  min-height: 100vh;
+}
+
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
+}
+
+.room-card {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.room-card:hover {
+  transform: translateY(-5px);
+}
+
+.price {
+  font-weight: bold;
+  margin: 10px 0;
+  color: #0077cc;
+}
+
+button {
+  padding: 8px 15px;
+  border: none;
+  background: black;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
+.available {
+  color: green;
+  font-weight: bold;
+}
+
+.booked {
+  color: red;
+  font-weight: bold;
+}

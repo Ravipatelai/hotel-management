@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -18,12 +19,28 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", form);
+      const res = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        form
+      );
 
-      localStorage.setItem("token", res.data.token);
+      const token = res.data.token;
+
+      // Save token
+      localStorage.setItem("token", token);
+
+      // Decode token
+      const decoded = jwtDecode(token);
+
       alert("Login Successful");
 
-      navigate("/home");
+      // 🔥 Role Based Navigation
+      if (decoded.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/home");
+      }
+
     } catch (err) {
       alert(err.response?.data?.message || "Login Failed");
     }
@@ -39,6 +56,7 @@ const Login = () => {
             name="email"
             type="email"
             placeholder="Email Address"
+            value={form.email}
             onChange={handleChange}
             required
             style={styles.input}
@@ -48,6 +66,7 @@ const Login = () => {
             name="password"
             type="password"
             placeholder="Password"
+            value={form.password}
             onChange={handleChange}
             required
             style={styles.input}
@@ -72,7 +91,6 @@ const Login = () => {
 const styles = {
  
   card: {
-    marginTop:"70px",
     background: "#fff",
     padding: "40px",
     borderRadius: "10px",
@@ -103,8 +121,7 @@ const styles = {
     background: "#2a5298",
     color: "#fff",
     fontSize: "16px",
-    cursor: "pointer",
-    transition: "0.3s"
+    cursor: "pointer"
   },
   text: {
     marginTop: "15px",
